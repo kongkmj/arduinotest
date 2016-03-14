@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Graph</title>
+</head>
+<body>
+<p> graph</p>
+<div ng-repeat="rdata in resourcedata | reverse">
+    <canvas id="line" class="chart chart-line" chart-data="rdata.data"
+            chart-labels="rdata.labels" chart-legend="true" chart-series="rdata.series"
+            chart-click="onClick" >
+    </canvas>
+    <p>{{rdata}}</p>
+</div>
+
+
+
+</body>
+</html>

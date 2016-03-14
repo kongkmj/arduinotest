@@ -1,0 +1,31 @@
+<html ng-app="myApp">
+<head>
+    <meta charset="utf8"/>
+    <base href="/"/>
+    <title>Angular Express Seed App</title>
+    <link rel="stylesheet" href="/css/app.css"/>
+    <link rel="stylesheet" href="js/lib/angular-chart.js/dist/angular-chart.css"/>
+</head>
+<body>
+<div ng-controller="AppCtrl">
+    <h2>{{name}}</h2>
+    <ul class="menu">
+        <li><a href="graph">graph</a></li>
+        <li><a href="inputdata">inputdata</a></li>
+    </ul>
+    <div ng-view="ng-view"></div>
+    <div>Angular seed app: v<span app-version="app-version"></span></div>
+</div>
+<script src="js/lib/angular/angular.js"></script>
+<script src="js/lib/angular-route/angular-route.js"></script>
+<script src="js/lib/angular-resource/angular-resource.js"></script>
+<script src="js/lib/Chart.js/Chart.js"></script>
+<script src="js/lib/angular-chart.js/angular-chart.js"></script>
+<script src="/socket.io/socket.io.js"></script>
+<script src="js/app.js"></script>
+<script src="js/services.js"></script>
+<script src="js/controllers.js"></script>
+<script src="js/filters.js"></script>
+<script src="js/directives.js"></script>
+</body>
+</html>
