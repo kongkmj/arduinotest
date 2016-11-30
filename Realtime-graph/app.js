@@ -29,14 +29,12 @@ var pushdata = [
   ]}
 ];
 
-
-
 /**
  * Configuration
  */
 
 // all environments
-app.set('port', process.env.PORT || 3000);
+app.set('port', process.env.PORT || 80);
 app.set('views', __dirname + '/views');
 app.engine('html', require('ejs').renderFile);
 app.set('view engine', 'html');
@@ -69,8 +67,8 @@ app.get('/partials/:name', routes.partials);
 
 // JSON API
 app.get('/api/name', api.name);
-
 // redirect all others to the index (HTML5 history)
+
 
 app.get('/pushdata', function (req, res) {
   'use strict';
@@ -79,6 +77,9 @@ app.get('/pushdata', function (req, res) {
 
   res.send(pushdata);
 });
+app.get('*',routes.index);
+
+
 
 app.post('/pushdata', jsonParser, function (req, res) {
   'use strict';
@@ -88,7 +89,6 @@ var b =0;
   }
 
   pushdata[0].data[0].push(req.body.data[0]);
-  //pushdata[0].data[1].push(req.body.data[1]);
   pushdata[0].labels.push(req.body.label);
 
 
@@ -96,6 +96,7 @@ var b =0;
   io.emit('datainput', req.body);
   return res.sendStatus(200);
 });
+
 
 
 /**

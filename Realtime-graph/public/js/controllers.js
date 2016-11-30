@@ -16,44 +16,46 @@ angular.module('myApp.controllers', []).
     });
 
   }).
+
+  controller('googlemaps',function ($scope,$location) {
+      console.log('googlemaps');
+
+  }).
+
   controller('MyCtrl1', function ($scope,PushData,socketio) {
 
-  $scope.resourcedata = PushData.query();
-  //$scope.data = [1,2,3,4,5];
+    $scope.resourcedata = PushData.query();
 
-  console.log($scope.resourcedata);
-var a = 5;
+    console.log($scope.resourcedata);
+    var a = 5;
 
 
-  socketio.on('datainput', function (msg) {
-    //console.log(msg);
-    //$scope.resourcedata[0].data[0].push(msg.data[0]);
-    //$scope.resourcedata[0].data[1].push(msg.data[1]);
-    //$scope.resourcedata[0].labels.push(msg.labels);
-    if($scope.resourcedata[0].labels.length==10)
-    {
-      $scope.resourcedata[0].labels=$scope.resourcedata[0].labels.slice(1);
-      $scope.resourcedata[0].labels.push(a.toString());
-      a++;
-    }
-    else {
-      $scope.resourcedata[0].labels.push(a.toString());
-      a++;
-    }
+    socketio.on('datainput', function (msg) {
 
-    if($scope.resourcedata[0].data[0].length==10)
-    {
-      $scope.resourcedata[0].data[0]=$scope.resourcedata[0].data[0].slice(1);
-      $scope.resourcedata[0].data[0].push(msg.data[0]);
-    }
-    else {
-      $scope.resourcedata[0].data[0].push(msg.data[0]);
-    }
+      if($scope.resourcedata[0].labels.length==10)
+      {
+        $scope.resourcedata[0].labels=$scope.resourcedata[0].labels.slice(1);
+        $scope.resourcedata[0].labels.push(a.toString());
+        a++;
+      }
+      else {
+        $scope.resourcedata[0].labels.push(a.toString());
+        a++;
+      }
 
-  });
-$scope.onClick = function (points, evt) {
-    console.log(points, evt);
-  };
+      if($scope.resourcedata[0].data[0].length==10)
+      {
+        $scope.resourcedata[0].data[0]=$scope.resourcedata[0].data[0].slice(1);
+        $scope.resourcedata[0].data[0].push(msg.data[0]);
+      }
+      else {
+        $scope.resourcedata[0].data[0].push(msg.data[0]);
+      }
+
+    });
+    $scope.onClick = function (points, evt) {
+      console.log(points, evt);
+    };
 
   }).
 controller('inputCtrl', function ($scope, $location, PushData) {
@@ -69,4 +71,16 @@ controller('inputCtrl', function ($scope, $location, PushData) {
         $location.path('/');
       };
 
+    }).
+controller('termCtrl', function ($scope,socket) {
+  'use strict';
+
+  io.on('connection', function (socket) {
+    //chat message 이벤트 발생
+    socket.on('chat message',function(msg){
+      //public 통신
+      io.emit('chat message',msg);
     });
+  });
+
+});

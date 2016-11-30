@@ -23,17 +23,27 @@ angular.module('myApp', [
 .config(function ($routeProvider, $locationProvider) {
   $routeProvider.
 
+      when('/terminal', {
+          controller: 'termCtrl',
+          templateUrl: 'partials/terminal.html'
+      })
+      .
+
       when('/inputdata', {
           controller: 'inputCtrl',
           templateUrl: 'partials/pushdata.html'
       })
-      .otherwise({
-        redirectTo: '/'
+      .when('/googlemaps',{
+        controller: 'googlemaps',
+        templateUrl:'partials/googlemaps'
       })
       .when('/graph', {
       templateUrl: 'partials/partial1',
       controller: 'MyCtrl1'
-    });
+    })
+      .otherwise({
+      redirectTo: '/'
+  });
 
   $locationProvider.html5Mode(true);
 })
